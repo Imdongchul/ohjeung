@@ -1,0 +1,28 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post">
+          {{form.non_field_errors}}
+          {% csrf_token %}
+          <label class="login" for="exampleInputEmail1 ">ID / Email</label>
+          {{form.username}}
+          <h1>{{ form.as_p }}dd</h1>
+          <label class="login" for="exampleInputPassword1">PW</label>
+          {{form.password}}
+          {{form.password.error}}
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </div>
+    </div>
+  </div>
+</div>

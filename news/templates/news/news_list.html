@@ -1,0 +1,144 @@
+{% extends 'layout.html'%}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'news/news_custom.css'%}">
+{% endblock%}
+
+{% block content %}
+<!-- Serch -->
+    <article class="article fixed-top">
+        <div class="search navbar">
+            <button class="btn_search navbar-toggler" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                <i class="fa fa-search fa-2x" aria-hidden="true"></i>
+            </button>
+            <div class="collapse submit mt-1" id="collapseExample">
+                <form class="form-inline" action="" method="get">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                    <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </article>
+<!-- Serch end -->
+
+<!-- 필터 시작 -->
+    <main class="main">
+        <div class="container pt-5 mt-5">
+            <section class="posts pt-4 mb-3">
+                <div class="btn-group d-flex row justify-content-end" role="group" aria-label="Basic example" data-toggle="bottons">
+                    <button type="button" class="btn btn-secondary">실시간 순</button>
+                    <button type="button" class="btn btn-secondary">좋아요 순</button>
+                    <button type="button" class="btn btn-secondary"><a href=./newspeed2.html>실시간 타임라인 보기</a></button>
+                </div>
+            </section>
+<!-- 필터 끝 -->
+
+<!-- 게시글 시작 -->
+    {% for post in post_list %}
+            <section class="posts pt-4">
+                <ul class="row justify-content-center">
+                    <li class="col-12 col-sm-6">
+                        <div class="post pl-3 pt-1">
+                            <p class="post_user"><a href="#">'{{user.username}}</a> 여행자님'</p>
+                            <div class="d-flex flex-nowrap">
+                                <p class="post_upload">UPLOAD DATE</p>
+                                <!-- 게시글 게시 시간 -->
+                                <p class="post_date ml-2 pl-1">{{ post.create_at }}</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col-12 col-sm-6">
+                        <div class="icon pt-3 pr-3 row justify-content-end">
+                            <i class="fa fa-heart-o fa-2x px-1" aria-hidden="true"></i>
+                            <i class="fa fa-map-marker fa-2x px-1" aria-hidden="true"></i>
+                            <div class="dropdown">
+                                <button class="btn_option" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-plus fa-2x pb-2" aria-hidden="true"></i>
+                                </button>
+                                <!-- 게시글 공유 -->
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#"><i class="fa fa-share-alt" aria-hidden="true"></i> 공유하기 </a>
+                                <!-- 게시자 신고 -->
+                                    <a class="dropdown-item" href="#"><i class="fa fa-ban" aria-hidden="true"></i> 신고하기 </a>
+                                <!-- 게시자 차단 -->
+                                    <a class="dropdown-item" href="#"><i class="fa fa-times-circle-o" aria-hidden="true"></i> 차단하기 </a>
+                                <!-- 게시글 수정 -->
+                                    <a class="dropdown-item" href="#"><i class="fa fa-times-circle-o" aria-hidden="true"></i> 수정하기 </a>
+                                <!-- 게시글 삭제 -->
+                                    <a class="dropdown-item" href="#"><i class="fa fa-times-circle-o" aria-hidden="true"></i> 삭제하기 </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            <!-- 카드 내용 시작 -->
+            <div class="group__card row mx-0">
+                <div class="col-12">
+                    <div class="row">
+                        <!-- 이미지 확대 모달 -->
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 px-0 mt-3 mt-md-0" data-toggle="modal" data-target=".bd-example-modal-{{post.id}}">
+                            <a href="#" class="tourbook__main__container d-flex justify-content-center">
+                                {% if post.photo %}
+                                <img class="tourbook__main__img card-img-top height-fix" src="{{ post.photo.url }}">
+                                {% else %}
+                                <img class="tourbook__main__img card-img-top height-fix" src="http://cfile27.uf.tistory.com/image/202F1C464DD57EB6158D14" alt>
+                                {% endif %}
+                            </a>
+                        </div>
+                        <!-- 이미지 확대 모달 끝 -->
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 flex-row px-0">
+                                    <div class="card">
+                                        <a href="#" class="tourbook__side__container d-flex justify-content-center">
+                                            {% if post.photo %}
+                                            <img class="tourbook__side__img card-img-top height-fix" src="{{ post.photo.url }}">
+                                            {% else %}
+                                            <img class="tourbook__side__img card-img-top height-fix" src="http://www.petzine.co.kr/news/photo/201701/885_2223_5221.jpg" alt>
+                                            {% endif %}
+                                        </a>
+                                    </div>
+                                    <div class="card">
+                                        <a href="#" class="tourbook__side__container d-flex justify-content-center">
+                                            <img class="tourbook__side__img card-img-top height-fix" src="http://www.mypetnews.net/news/photo/201312/447_288_511.jpg" alt>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 flex-row px-0">
+                                    <div class="card">
+                                        <a href="#" class="tourbook__side__container d-flex justify-content-center">
+                                            <img class="tourbook__side__img card-img-top height-fix" src="http://cfile27.uf.tistory.com/image/202F1C464DD57EB6158D14" alt>
+                                        </a>
+                                    </div>
+                                    <!-- 게시글 전체보기 모달 -->
+                                    <div class="card-block" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                        <a href="#">
+                                            <!--게시글 요약 내용-->
+                                            <h4 class="card-title">{{ post.title }}</h4>
+                                            <p class="card-text">{{ post.content }}</p>
+                                        </a>
+                                    </div>
+                                    <!-- 게시글 전체보기 모달 끝 -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        {% include "news/img_modal.html" %}
+        {% include 'news/view_modal.html'%}
+    {% endfor %}
+<!-- 게시글 끝 -->
+        </div>
+    </main>
+
+    <!-- 사진 확대 모달 -->
+
+    <!-- 자세한 내용 모달 -->
+
+
+
+{% endblock %}
